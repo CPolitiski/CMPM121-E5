@@ -8,7 +8,6 @@ import { StatusBar } from "./StatusBar.tsx";
 import { TileClicks } from "./tileClicks.ts";
 import { useSessionState } from "./useSessionState.ts";
 import { GoalTracker } from "./GoalTracker.tsx";
-
 // Composite: the whole screen is one component made of smaller ones, each of
 // which may be made of smaller ones still (Board is made of Tiles).
 export function App({ session }: { session: Session }) {
@@ -25,7 +24,6 @@ export function App({ session }: { session: Session }) {
 
   const solved = isSolved(state.puzzle);
   const last = state.level === LEVELS.length - 1;
-
   return (
     <main className="app">
       <header>
@@ -59,6 +57,13 @@ export function App({ session }: { session: Session }) {
           </p>
         )}
         <GoalTracker puzzle={state.puzzle} />
+        <button
+          type="button"
+          onClick={() => session.dispatch({ kind: "undo" })}
+          disabled={state.past.length === 0}
+        >
+          Undo
+        </button>
         <button
           type="button"
           onClick={() => session.dispatch({ kind: "restart" })}
