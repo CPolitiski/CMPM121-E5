@@ -1,6 +1,8 @@
 import type { Command, Session } from "../core/mod.ts";
 import type { BoardInput } from "./tileClicks.ts";
 import { replay } from "./replay.ts";
+import { clickToMove } from "./clickToMove.ts";
+
 // Strategy: each controller is one interchangeable way of turning input into
 // Commands. The app attaches exactly one at a time, and the board, the session,
 // and the other controllers do not know which.
@@ -36,7 +38,7 @@ const keyboard: Controller = {
     return () => globalThis.removeEventListener("keydown", onKeyDown);
   },
 };
-export const CONTROLLERS = { keyboard, replay };
+export const CONTROLLERS = { keyboard, replay, clickToMove };
 
 export type ControllerName = keyof typeof CONTROLLERS;
 
